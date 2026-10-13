@@ -1,0 +1,26 @@
+
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        int n = score.length;
+        String[] ans = new String[n];
+        boolean[] used = new boolean[n];
+
+        for (int r = 1; r <= n; r++) {
+            int max = -1, idx = 0;
+
+            for (int i = 0; i < n; i++) {
+                if (!used[i] && score[i] > max) {
+                    max = score[i];
+                    idx = i;
+                }
+            }
+
+            used[idx] = true;
+            if (r == 1) ans[idx] = "Gold Medal";
+            else if (r == 2) ans[idx] = "Silver Medal";
+            else if (r == 3) ans[idx] = "Bronze Medal";
+            else ans[idx] = "" + r;
+        }
+        return ans;
+    }
+}
